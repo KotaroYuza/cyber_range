@@ -1,6 +1,6 @@
 # main
 module "main" {
-  #count      = 0  ## mainを立てずにcyber_rangeだけ立てたい場合はここのコメントアウトを外す
+  count      = 0  # mainを立てる場合はここをコメントアウトする
   source     = "./modules/"
   app_name   = var.app_name
   env_name   = var.env_name
