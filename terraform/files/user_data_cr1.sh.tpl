@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MY_LOCAL_IP=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+MY_LOCAL_IP=`curl http://169.254.169.254/latest/meta-data/public-ipv4`
 
 apt update -y
 apt install expect -y
