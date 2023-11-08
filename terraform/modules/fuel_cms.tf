@@ -9,10 +9,9 @@ resource "aws_instance" "fuel_cms" {
   hibernation                          = false
   host_id                              = ""
   host_resource_group_arn              = null
-  iam_instance_profile                 = "19aj143-ec2-ssm"
   instance_initiated_shutdown_behavior = "stop"
   instance_type                        = "t2.micro"
-  key_name                             = "19aj143"
+  key_name                             = aws_key_pair.key_pair.key_name
   monitoring                           = false
   placement_group                      = ""
   placement_partition_number           = 0
@@ -38,8 +37,6 @@ resource "aws_instance" "fuel_cms" {
     "Name" = "${var.app_name}-ebs-${var.env_name}-fuelcms"
   }
   vpc_security_group_ids = [
-    aws_security_group.security_group_ec2.id
-    #    "sg-094cae3f40aa09946",
-    #    "sg-0f96da761f3013649"
+    aws_security_group.security_group_fuelcms.id
   ]
 }

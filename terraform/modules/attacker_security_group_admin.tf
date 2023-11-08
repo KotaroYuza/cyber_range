@@ -1,7 +1,8 @@
-resource "aws_security_group" "security_group_ec2_admin" {
-  name        = "${var.app_name}-sg-${var.env_name}-ec2-admin"
-  description = "${var.env_name}-admin"
-  vpc_id      = aws_vpc.vpc.id # 対象のVPC IDを指定
+resource "aws_security_group" "attacker_security_group_ec2_admin" {
+  count       = var.perform_attack ? 1 : 0
+  name        = "${var.app_name}-sg-${var.env_name}-attacker-ec2-admin"
+  description = "${var.env_name}-attacker-admin"
+  vpc_id      = aws_vpc.attacker_vpc[0].id # 対象のVPC IDを指定
 
   ingress {
     from_port   = 0
@@ -17,6 +18,6 @@ resource "aws_security_group" "security_group_ec2_admin" {
     cidr_blocks = ["0.0.0.0/0"] # すべてのIPアドレスへのトラフィックを許可
   }
   tags = {
-    Name = "${var.app_name}-sg-${var.env_name}-ec2-admin"
+    Name = "${var.app_name}-sg-${var.env_name}-attacker-ec2-admin"
   }
 }

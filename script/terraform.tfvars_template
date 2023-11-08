@@ -1,0 +1,12 @@
+# main
+app_name   = "19aj143"
+env_name   = "main"
+public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPc6X+FeAopn0/y0jL+2OnR2Ma3GGzQ8U7Qdhn7b3Biw ymklab@DESKTOP-OJ93UUH"
+
+# cr1
+cr1_enabled             = <CR1_ENABLED>
+cr1_perform_attack      = <CR1_PERFORM_ATTACK>
+cr1_app_name            = "19aj143"
+cr1_env_name            = "cr1"
+cr1_public_key          = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG96pzJuRj2QtuhSGIkUhAdBCNiGELw4DM/zNBR5j6XT ymklab@DESKTOP-OJ93UUH"
+cr1_attacker_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFxQo0K5kAGU9EAvydPgIA9+JOagbE5wl+hFZTLKA86y ymklab@DESKTOP-OJ93UUH"

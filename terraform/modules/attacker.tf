@@ -1,4 +1,5 @@
-resource "aws_instance" "attacker" {
+resource "aws_instance" "attacker_attacker" {
+  count                                = var.perform_attack ? 1 : 0
   ami                                  = "ami-019e138eea00aec05"
   associate_public_ip_address          = true
   availability_zone                    = "ap-northeast-1d"
@@ -12,20 +13,19 @@ resource "aws_instance" "attacker" {
   iam_instance_profile                 = ""
   instance_initiated_shutdown_behavior = "stop"
   instance_type                        = "t2.medium"
-  key_name                             = "19aj143"
+  key_name                             = aws_key_pair.attacker_key_pair[0].key_name
   monitoring                           = false
   placement_group                      = ""
   placement_partition_number           = 0
-  #private_ip                           = "172.16.1.176"
-  secondary_private_ips = []
-  security_groups       = []
-  source_dest_check     = "true"
-  subnet_id             = aws_subnet.ap_northeast_1d.id
+  secondary_private_ips                = []
+  security_groups                      = []
+  source_dest_check                    = "true"
+  subnet_id                            = aws_subnet.attacker_ap_northeast_1d[0].id
   tags = {
-    "Name" = "${var.app_name}-ec2-${var.env_name}-kali"
+    "Name" = "${var.app_name}-ec2-${var.env_name}-attacker-kali"
   }
   tenancy                     = "default"
-  user_data                   = data.template_file.user_data.rendered
+  user_data                   = data.template_file.attacker_user_data.rendered
   user_data_base64            = null
   user_data_replace_on_change = null
 
@@ -39,18 +39,18 @@ resource "aws_instance" "attacker" {
 
 
   volume_tags = {
-    "Name" = "${var.app_name}-ebs-${var.env_name}-kali"
+    "Name" = "${var.app_name}-ebs-${var.env_name}-attacker-kali"
   }
   vpc_security_group_ids = [
-    aws_security_group.security_group_ec2.id
+    aws_security_group.attacker_security_group_attacker[0].id
   ]
 }
 
 # テンプレートファイルを読み込む
-data "template_file" "user_data" {
+data "template_file" "attacker_user_data" {
   template = file("./files/user_data_${var.env_name}.sh.tpl")
 
   vars = {
-    FUEL_CMS_IP = aws_instance.fuel_cms.private_ip
+    FUEL_CMS_IP = aws_instance.fuel_cms.public_ip
   }
 }
